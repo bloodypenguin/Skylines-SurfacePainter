@@ -1,6 +1,7 @@
 ﻿using System;
 using ColossalFramework;
 using ColossalFramework.IO;
+using NaturalResourcesBrush;
 using UnityEngine;
 
 namespace SurfacePainter
@@ -11,7 +12,7 @@ namespace SurfacePainter
         public static readonly int GRID_SIZE = 4320;
         public static readonly int GRID_PER_AREA = 480;
 
-        private static readonly SurfaceItem emptyItem = new SurfaceItem
+        private static readonly SurfaceItem EMPTY_ITEM = new SurfaceItem
         {
             overrideExisting = false,
             surface = TerrainModify.Surface.None
@@ -19,6 +20,12 @@ namespace SurfacePainter
 
         private SurfaceItem[] m_surfaces;
         public bool isEightyOneEnabled;
+
+        public void Setup()
+        {
+            Reset();
+            isEightyOneEnabled = Util.IsModActive("81 Tiles(Fixed for C:S 1.2 +)");
+        }
 
         public void Reset()
         {
@@ -38,7 +45,7 @@ namespace SurfacePainter
             {
                 if (x < GRID_PER_AREA * 2 || x >= GRID_PER_AREA * 7 || z < GRID_PER_AREA * 2 || z >= GRID_PER_AREA * 7)
                 {
-                    return emptyItem;
+                    return EMPTY_ITEM;
                 }
             }
             return Surfaces[(z - 2 * GRID_PER_AREA) * (GRID_SIZE - GRID_PER_AREA * 4) + x - 2 * GRID_PER_AREA];

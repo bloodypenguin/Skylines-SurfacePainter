@@ -11,8 +11,10 @@ namespace SurfacePainter.Detours
         [RedirectMethod]
         public TerrainManager.SurfaceCell GetSurfaceCell(int x, int z)
         {
-            int num1 = Mathf.Min(x / 480, 8);
-            int num2 = Mathf.Min(z / 480, 8);
+            //begin mod
+            int num1 = Mathf.Clamp(x / 480, 0, 8);
+            int num2 = Mathf.Clamp(z / 480, 0, 8);
+            //end mod
             int index = num2 * 9 + num1;
             int num3 = this.m_patches[index].m_simDetailIndex;
             if (num3 == 0)
@@ -20,18 +22,27 @@ namespace SurfacePainter.Detours
             int num4 = (num3 - 1) * 480 * 480;
             int num5 = x - num1 * 480;
             int num6 = z - num2 * 480;
+            //begin mod
+            var maxLimit = this.m_detailSurface.Length - 1;
+            //end mod
             if (num5 == 0 && num1 != 0 && this.m_patches[index - 1].m_simDetailIndex == 0 || num6 == 0 && num2 != 0 && this.m_patches[index - 9].m_simDetailIndex == 0)
             {
                 TerrainManager.SurfaceCell surfaceCell = this.SampleRawSurface((float)x * 0.25f, (float)z * 0.25f);
-                surfaceCell.m_clipped = this.m_detailSurface[num4 + num6 * 480 + num5].m_clipped;
+                //begin mod
+                surfaceCell.m_clipped = this.m_detailSurface[Mathf.Clamp(num4 + num6 * 480 + num5, 0, maxLimit)].m_clipped;
+                //end mod
                 return UpdateCell(surfaceCell, x, z);
             }
             if ((num5 != 479 || num1 == 8 || this.m_patches[index + 1].m_simDetailIndex != 0) && (num6 != 479 || num2 == 8 || this.m_patches[index + 9].m_simDetailIndex != 0))
             {
-                return UpdateCell(this.m_detailSurface[num4 + num6 * 480 + num5], x, z);
+                //begin mod
+                return UpdateCell(this.m_detailSurface[Mathf.Clamp(num4 + num6 * 480 + num5, 0, maxLimit)], x, z);
+                //end mod
             }
             TerrainManager.SurfaceCell surfaceCell1 = this.SampleRawSurface((float)x * 0.25f, (float)z * 0.25f);
-            surfaceCell1.m_clipped = this.m_detailSurface[num4 + num6 * 480 + num5].m_clipped;
+            //begin mod
+            surfaceCell1.m_clipped = this.m_detailSurface[Mathf.Clamp(num4 + num6 * 480 + num5, 0, maxLimit)].m_clipped;
+            //end mod
             return UpdateCell(surfaceCell1, x, z);
         }
 
