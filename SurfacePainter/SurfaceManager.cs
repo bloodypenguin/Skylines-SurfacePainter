@@ -11,6 +11,7 @@ namespace SurfacePainter
         public static readonly int CELL_SIZE = 4;
         public static readonly int GRID_SIZE = 4320;
         public static readonly int GRID_PER_AREA = 480;
+        private static readonly int STEP = 16;
 
         private static readonly SurfaceItem EMPTY_ITEM = new SurfaceItem
         {
@@ -24,12 +25,23 @@ namespace SurfacePainter
         public void Setup()
         {
             Reset();
-            isEightyOneEnabled = Util.IsModActive("81 Tiles(Fixed for C:S 1.2 +)");
+            isEightyOneEnabled = Util.IsModActive("81 Tiles (Fixed for C:S 1.2+)");
         }
 
         public void Reset()
         {
             m_surfaces = null;
+        }
+
+        public void UpdateWholeMap()
+        {
+            for (var i = 0; i < 1080; i += STEP)
+            {
+                for (var j = 0; j < 1080; j += STEP)
+                {
+                    TerrainModify.UpdateArea(i, j, i + STEP - 1, j + STEP - 1, false, true, false);
+                }
+            }
         }
 
         public SurfaceItem GetSurfaceItem(int z, int x)
@@ -86,18 +98,32 @@ namespace SurfacePainter
                 if (isEightyOneEnabled && m_surfaces.Length == defaultSize)
                 {
                     var newSurfaces = new SurfaceItem[eightyOneSize];
-                    var offset = (eightyOneSize - defaultSize) / 2;
-                    Array.Copy(m_surfaces, 0, newSurfaces, offset, m_surfaces.Length);
+                    MigrateItems(newSurfaces, true);
                     m_surfaces = newSurfaces;
                 }
                 else if (!isEightyOneEnabled && m_surfaces.Length == eightyOneSize)
                 {
                     var newSurfaces = new SurfaceItem[defaultSize];
-                    var offset = (eightyOneSize - defaultSize) / 2;
-                    Array.Copy(m_surfaces, offset, newSurfaces, 0, newSurfaces.Length);
+                    MigrateItems(newSurfaces, false);
                     m_surfaces = newSurfaces;
                 }
                 return m_surfaces;
+            }
+        }
+
+        private void MigrateItems(SurfaceItem[] newSurfaces, bool toEightyOne)
+        {
+            var defaultRowLength = 5 * GRID_PER_AREA;
+            var eightyOneRowLength = 9 * GRID_PER_AREA;
+            var offset = 2 * eightyOneRowLength * GRID_PER_AREA + 2 * GRID_PER_AREA;
+            for (var i = 0; i < defaultRowLength; i++)
+            {
+                var sourceStart = toEightyOne ? i * defaultRowLength : offset + i * eightyOneRowLength;
+                var destStart = toEightyOne ? offset + i * eightyOneRowLength : i * defaultRowLength;
+                Array.Copy(
+                m_surfaces, sourceStart,
+                newSurfaces, destStart,
+                defaultRowLength);
             }
         }
 
@@ -172,7 +198,7 @@ namespace SurfacePainter
                 surface = surface
             };
         }
-        
+
         public struct SurfaceItem
         {
             public TerrainModify.Surface surface;
