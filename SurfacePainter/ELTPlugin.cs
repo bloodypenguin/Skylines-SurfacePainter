@@ -27,7 +27,7 @@ namespace SurfacePainter
 
         public IEnumerable<ToolBase> SetupTools(LoadMode mode)
         {
-            if (mode == LoadMode.LoadAsset || mode == LoadMode.NewAsset)
+            if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame)
             {
                 return new ToolBase[] {};
             }
@@ -42,7 +42,7 @@ namespace SurfacePainter
 
         public void CreateToolbars(LoadMode mode)
         {
-            if (mode == LoadMode.LoadAsset || mode == LoadMode.NewAsset)
+            if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame)
             {
                 return;
             }
