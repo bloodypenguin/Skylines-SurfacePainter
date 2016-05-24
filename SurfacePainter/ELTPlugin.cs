@@ -20,6 +20,11 @@ namespace SurfacePainter
 
         public void Dispose()
         {
+            RevertDetours();
+        }
+
+        public static void RevertDetours()
+        {
             Redirector<SurfacePanelDetour>.Revert();
             SurfacePanelDetour.Dispose();
             Redirector<TerrainManagerDetour>.Revert();
@@ -29,12 +34,12 @@ namespace SurfacePainter
         {
             if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame)
             {
-                return new ToolBase[] {};
+                return new ToolBase[] { };
             }
             var surfaceBrushTool = ToolsModifierControl.GetTool<InGameSurfaceTool>();
             if (surfaceBrushTool != null)
             {
-                return new ToolBase[] {};
+                return new ToolBase[] { };
             }
             surfaceBrushTool = ToolsModifierControl.toolController.gameObject.AddComponent<InGameSurfaceTool>();
             return new ToolBase[] { surfaceBrushTool };

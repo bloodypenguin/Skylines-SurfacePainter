@@ -35,9 +35,10 @@ namespace SurfacePainter
 
         public void UpdateWholeMap()
         {
-            for (var i = 0; i < 1080; i += STEP)
+            const int offset =  120 * 2;
+            for (var i = offset; i < TerrainManager.RAW_RESOLUTION - offset; i += STEP)
             {
-                for (var j = 0; j < 1080; j += STEP)
+                for (var j = offset; j < TerrainManager.RAW_RESOLUTION - offset; j += STEP)
                 {
                     TerrainModify.UpdateArea(i, j, i + STEP - 1, j + STEP - 1, false, true, false);
                 }

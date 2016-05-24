@@ -5,7 +5,6 @@ namespace SurfacePainter
     public class LoadingExtension : LoadingExtensionBase
     {
 
-
         public override void OnCreated(ILoading loading)
         {
             base.OnCreated(loading);
@@ -15,7 +14,15 @@ namespace SurfacePainter
         public override void OnLevelLoaded(LoadMode mode)
         {
             base.OnLevelLoaded(mode);
-            SurfaceManager.instance.UpdateWholeMap();
+            if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame)
+            {
+                EltPlugin.RevertDetours();
+            }
+            else
+            {
+                SurfaceManager.instance.UpdateWholeMap();
+            }
+
         }
     }
 }
