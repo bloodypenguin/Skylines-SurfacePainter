@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using ColossalFramework;
+﻿using ColossalFramework;
 using ColossalFramework.UI;
 using NaturalResourcesBrush.Redirection;
 using UnityEngine;
@@ -17,24 +15,6 @@ namespace SurfacePainter.Detours
         public static void Dispose()
         {
             m_OptionsBrushPanel = null;
-        }
-
-        [RedirectMethod]
-        public override void RefreshPanel()
-        {
-            base.RefreshPanel();
-            for (int index = 0; index < kSurfaces.Length; ++index)
-            {
-                //begin mod
-
-                var button = SpawnEntry(kSurfaces[index].enumName, index);
-                if (kSurfaces[index].enumValue == TerrainModify.Surface.Clip)
-                {
-                    button.isVisible = false;
-                    button.enabled = false;
-                }
-                //end mod
-            }
         }
 
         [RedirectMethod]
@@ -60,12 +40,5 @@ namespace SurfacePainter.Detours
         }
 
         public override ItemClass.Service service { get; }
-
-        [RedirectReverse]
-        private UIButton SpawnEntry(string name, int index)
-        {
-            UnityEngine.Debug.LogError("Failed to detour SpawnEntry()");
-            return null;
-        }
     }
 }

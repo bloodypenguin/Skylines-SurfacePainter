@@ -148,6 +148,9 @@ namespace SurfacePainter
                 case TerrainModify.Surface.Field:
                     surfaceType = 5;
                     break;
+                case TerrainModify.Surface.Clip:
+                    surfaceType = 6;
+                    break;
                 default:
                     surfaceType = 0;
                     break;
@@ -174,6 +177,9 @@ namespace SurfacePainter
                     break;
                 case 5:
                     surfaceType = TerrainModify.Surface.Field;
+                    break;
+                case 6:
+                    surfaceType = TerrainModify.Surface.Clip;
                     break;
             }
             return surfaceType;

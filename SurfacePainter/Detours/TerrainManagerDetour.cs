@@ -97,7 +97,6 @@ namespace SurfacePainter.Detours
             }
             if (surfaceItem.surface == TerrainModify.Surface.Clip)
             {
-                surfaceCell.m_clipped = byte.MaxValue;
                 surfaceCell.m_ruined = 0;
                 surfaceCell.m_field = 0;
                 surfaceCell.m_pavementB = 0;
