@@ -48,11 +48,11 @@
     <Reference Include="ColossalManaged">
       <HintPath>C:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
     </Reference>
+    <Reference Include="ExtraLanscapingToolsCommon">
+      <HintPath>C:\Users\user\AppData\Local\Colossal Order\Cities_Skylines\Addons\Mods\ExtraLanscapingToolsCommon\ExtraLanscapingToolsCommon.dll</HintPath>
+    </Reference>
     <Reference Include="ICities">
       <HintPath>C:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
-    </Reference>
-    <Reference Include="NaturalResourcesBrush">
-      <HintPath>C:\Users\user\AppData\Local\Colossal Order\Cities_Skylines\Addons\Mods\NaturalResourcesBrush\NaturalResourcesBrush.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>C:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>

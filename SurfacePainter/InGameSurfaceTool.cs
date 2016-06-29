@@ -1,5 +1,5 @@
 ﻿using ColossalFramework;
-using NaturalResourcesBrush.Redirection;
+using ExtraLanscapingToolsCommon.Redirection;
 using UnityEngine;
 
 namespace SurfacePainter

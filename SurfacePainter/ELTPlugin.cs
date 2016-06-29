@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using ColossalFramework.UI;
+using ExtraLanscapingToolsCommon;
+using ExtraLanscapingToolsCommon.API;
+using ExtraLanscapingToolsCommon.Redirection;
 using ICities;
-using NaturalResourcesBrush;
-using NaturalResourcesBrush.API;
-using NaturalResourcesBrush.Redirection;
 using SurfacePainter.Detours;
 using UnityEngine;
 

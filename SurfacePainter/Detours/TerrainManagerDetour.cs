@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using NaturalResourcesBrush.Redirection;
+using ExtraLanscapingToolsCommon.Redirection;
 using UnityEngine;
 
 namespace SurfacePainter.Detours
@@ -9,7 +9,7 @@ namespace SurfacePainter.Detours
     public class TerrainManagerDetour : TerrainManager
     {
         [RedirectMethod]
-        public TerrainManager.SurfaceCell GetSurfaceCell(int x, int z)
+        public new TerrainManager.SurfaceCell GetSurfaceCell(int x, int z)
         {
             //begin mod
             int num1 = Mathf.Clamp(x / 480, 0, 8);
