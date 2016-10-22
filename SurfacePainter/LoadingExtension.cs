@@ -20,7 +20,7 @@ namespace SurfacePainter
             }
             else
             {
-                SurfaceManager.instance.UpdateWholeMap();
+                SurfaceManager.UpdateWholeMap();
             }
 
         }

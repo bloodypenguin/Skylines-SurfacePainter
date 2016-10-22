@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using ColossalFramework;
 using ColossalFramework.IO;
 using ExtraLanscapingToolsCommon;
@@ -33,16 +34,39 @@ namespace SurfacePainter
             m_surfaces = null;
         }
 
-        public void UpdateWholeMap()
+        public static void UpdateWholeMap()
         {
-            const int offset =  120 * 2;
-            for (var i = offset; i < TerrainManager.RAW_RESOLUTION - offset; i += STEP)
+            SimulationManager.instance.AddAction(() =>
             {
-                for (var j = offset; j < TerrainManager.RAW_RESOLUTION - offset; j += STEP)
+                try
                 {
-                    TerrainModify.UpdateArea(i, j, i + STEP - 1, j + STEP - 1, false, true, false);
+                    var propAnarchyHookType = Util.FindType("PropAnarchyHook");
+                    propAnarchyHookType?.GetMethod("ImUpToNoGood", BindingFlags.Public | BindingFlags.Static)?.Invoke(null, new object[] { });
                 }
-            }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.LogException(e);
+                }
+                const int offset = 120 * 2;
+                for (var i = offset; i < TerrainManager.RAW_RESOLUTION - offset; i += STEP)
+                {
+                    for (var j = offset; j < TerrainManager.RAW_RESOLUTION - offset; j += STEP)
+                    {
+                        TerrainModify.BeginUpdateArea();
+                        TerrainModify.UpdateArea(i, j, i + STEP - 1, j + STEP - 1, false, true, false);
+                        TerrainModify.EndUpdateArea();
+                    }
+                }
+                try
+                {
+                    var propAnarchyHookType = Util.FindType("PropAnarchyHook");
+                    propAnarchyHookType?.GetMethod("MischiefManaged", BindingFlags.Public | BindingFlags.Static)?.Invoke(null, new object[] { });
+                }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.LogException(e);
+                }
+            });
         }
 
         public SurfaceItem GetSurfaceItem(int z, int x)
