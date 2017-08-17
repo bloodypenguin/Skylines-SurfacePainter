@@ -1,7 +1,7 @@
 ﻿using System;
 using ColossalFramework;
 using ColossalFramework.IO;
-using ExtraLanscapingToolsCommon;
+using NaturalResourcesBrush.Utils;
 using UnityEngine;
 
 namespace SurfacePainter

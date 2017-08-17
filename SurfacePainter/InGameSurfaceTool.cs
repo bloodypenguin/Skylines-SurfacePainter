@@ -1,6 +1,6 @@
 ﻿using ColossalFramework;
-using ExtraLanscapingToolsCommon.Redirection;
 using UnityEngine;
+using NaturalResourcesBrush.RedirectionFramework.Attributes;
 
 namespace SurfacePainter
 {

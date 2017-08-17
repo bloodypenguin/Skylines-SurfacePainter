@@ -48,8 +48,8 @@
     <Reference Include="ColossalManaged">
       <HintPath>C:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
     </Reference>
-    <Reference Include="ExtraLanscapingToolsCommon">
-      <HintPath>..\..\Skylines-NaturalResourcesBrush\ExtraLanscapingToolsCommon\bin\Release\ExtraLanscapingToolsCommon.dll</HintPath>
+    <Reference Include="NaturalResourcesBrush">
+      <HintPath>..\..\Skylines-NaturalResourcesBrush\NaturalResourcesBrush\bin\Release\NaturalResourcesBrush.dll</HintPath>
     </Reference>
     <Reference Include="ICities">
       <HintPath>C:\Games\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
