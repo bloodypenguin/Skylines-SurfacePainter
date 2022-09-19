@@ -56,7 +56,7 @@ namespace SurfacePainter
         {
             SimulationManager.instance.AddAction(() =>
             {
-                const int offset = 120 * 2;
+                int offset = SurfaceManager.instance.isEightyOneEnabled ? 0 : 120 * 2;
                 for (var i = offset; i < TerrainManager.RAW_RESOLUTION - offset; i += STEP)
                 {
                     for (var j = offset; j < TerrainManager.RAW_RESOLUTION - offset; j += STEP)
