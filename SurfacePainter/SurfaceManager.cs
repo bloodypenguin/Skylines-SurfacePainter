@@ -27,24 +27,8 @@ namespace SurfacePainter
         public void Setup()
         {
             Reset();
-            isEightyOneEnabled = Util.IsModActive("81 Tiles (Fixed for C:S 1.2+)");
-
-            if (!isEightyOneEnabled)
-            {
-                // Iterate through each loaded plugin assembly.
-                foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
-                {
-                    foreach (Assembly assembly in plugin.GetAssemblies())
-                    {
-                        if (assembly.GetName().Name.Equals("EightyOne2") && plugin.isEnabled)
-                        {
-                            isEightyOneEnabled = true;
-                            // At this point, we're done; return.
-                            break;
-                        }
-                    }
-                }
-            }
+            isEightyOneEnabled = Util.IsModActive("81 Tiles (Fixed for C:S 1.2+)")
+                || Util.IsModActive("EightyOne2");
         }
 
         public void Reset()
