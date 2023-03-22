@@ -40,6 +40,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableDataExtension.cs" />
     <Compile Include="SurfaceManager.cs" />
+    <Compile Include="ModUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">

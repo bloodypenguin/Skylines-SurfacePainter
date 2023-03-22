@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using ColossalFramework;
 using ColossalFramework.IO;
-using ColossalFramework.Plugins;
 using NaturalResourcesBrush.Utils;
 using UnityEngine;
 
@@ -27,8 +25,18 @@ namespace SurfacePainter
         public void Setup()
         {
             Reset();
-            isEightyOneEnabled = Util.IsModActive("81 Tiles (Fixed for C:S 1.2+)")
-                || Util.IsModActive("EightyOne2");
+            try
+            {
+                isEightyOneEnabled = Util.IsModActive("81 Tiles (Fixed for C:S 1.2+)")
+                                     || ModUtil.IsModAssemblyActive("EightyOne2");
+                Debug.Log($"Surface Painter: 81 Tiles enabled={isEightyOneEnabled}");
+            }
+            catch (Exception e)
+            {
+                isEightyOneEnabled = false;
+                Debug.LogException(e);
+                Debug.LogError("Surface Painter: failed to figure out whether 81 Tiles was enabled");
+            }
         }
 
         public void Reset()
