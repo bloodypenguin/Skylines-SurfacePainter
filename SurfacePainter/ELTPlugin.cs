@@ -61,16 +61,45 @@ namespace SurfacePainter
             {
                 return;
             }
-            ToolbarButtonSpawner.SpawnSubEntry(uiTabstrip, "Surface", "DECORATIONEDITOR_TOOL", null, "ToolbarIcon", true, mainToolbar.m_OptionsBar,
-mainToolbar.m_DefaultInfoTooltipAtlas);
-            ((UIButton)Object.FindObjectOfType<SurfacePanel>().Find("PavementB")).atlas = Util.CreateAtlasFromResources(new List<string> { "SurfacePavementB" });
-            ((UIButton)Object.FindObjectOfType<SurfacePanel>().Find("Gravel")).atlas = Util.CreateAtlasFromResources(new List<string> { "SurfaceGravel" });
-            ((UIButton)Object.FindObjectOfType<SurfacePanel>().Find("Field")).atlas = Util.CreateAtlasFromResources(new List<string> { "SurfaceField" });
-            ((UIButton)Object.FindObjectOfType<SurfacePanel>().Find("Clip")).atlas = Util.CreateAtlasFromResources(new List<string> { "SurfaceClip" });
-            ((UIButton)Object.FindObjectOfType<SurfacePanel>().Find("Ruined")).atlas = Util.CreateAtlasFromResources(new List<string> { "SurfaceRuined" });
+            ToolbarButtonSpawner.SpawnSubEntry(uiTabstrip, "Surface", "DECORATIONEDITOR_TOOL", null, "ToolbarIcon", true, mainToolbar.m_OptionsBar, mainToolbar.m_DefaultInfoTooltipAtlas);
 
-            ((UIButton)UIView.FindObjectOfType<GameMainToolbar>().Find("Surface")).atlas =
-                Util.CreateAtlasFromResources(new List<string> { "ToolbarIconSurface", "ToolbarIconBase" });
+
+            var SurfacePanel = UIView.FindObjectOfType<SurfacePanel>();
+            var buttons = SurfacePanel.GetComponentsInChildren<UIButton>();
+            foreach (var button in buttons)
+            {
+                if (button.name == "PavementB")
+                {
+                    button.atlas = Util.CreateAtlasFromResources(new List<string> { "SurfacePavementB" });
+                }
+                if (button.name == "Gravel")
+                {
+                    button.atlas = Util.CreateAtlasFromResources(new List<string> { "SurfaceGravel" });
+                }
+                if (button.name == "Field")
+                {
+                    button.atlas = Util.CreateAtlasFromResources(new List<string> { "SurfaceField" });
+                }
+                if (button.name == "Clip")
+                {
+                    button.atlas = Util.CreateAtlasFromResources(new List<string> { "SurfaceClip" });
+                }
+                if (button.name == "Ruined")
+                {
+                    button.atlas = Util.CreateAtlasFromResources(new List<string> { "SurfaceRuined" });
+                }
+            }
+
+            var GameMainToolbar = UIView.FindObjectOfType<GameMainToolbar>();
+            var Gamebuttons = GameMainToolbar.GetComponentsInChildren<UIButton>();
+            foreach (var button in Gamebuttons)
+            {
+                if (button.name == "Surface")
+                {
+                    button.atlas = Util.CreateAtlasFromResources(new List<string> { "ToolbarIconSurface", "ToolbarIconBase" });
+                }
+            }
+
         }
 
         public bool SupportsSingle(ToolBase tool)
